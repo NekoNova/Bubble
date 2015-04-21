@@ -100,32 +100,32 @@ function Bubble:OnChatMessage(channelCurrent, tMessage)
   --  bAlien      : Boolean if this is from the other faction
   --  bProfanity  : Boolean for swearing
   --
-	if tMessage.unitSource == nil then return end
+  if tMessage.unitSource == nil then return end
 	
-	local strMessage = ""
-	local channel = channelCurrent:GetType()
+  local strMessage = ""
+  local channel = channelCurrent:GetType()
 	
-	for idx, tSegment in ipairs(tMessage.arMessageSegments) do
-		strMessage = strMessage ..tSegment.strText
-	end
+  for idx, tSegment in ipairs(tMessage.arMessageSegments) do
+    strMessage = strMessage ..tSegment.strText
+  end
 	
-	-- Check for emotes, we're going to surrounded them by *
-	if channel == ChatSystemLib.ChatChannel_AnimatedEmote or channel == ChatSystemLib.ChatChannel_Emote then
-		strMessage = "*"..strMessage.."*"
-	end
+  -- Check for emotes, we're going to surrounded them by *
+  if channel == ChatSystemLib.ChatChannel_AnimatedEmote or channel == ChatSystemLib.ChatChannel_Emote then
+    strMessage = "*"..strMessage.."*"
+  end
 	
-	-- If we're dealing with a Yell, then we'll add some exclamation marks
-	if channel == ChatSystemLib.ChatChannel_Yell then
-		strMessage = strMessage.."!!"
-	end
+  -- If we're dealing with a Yell, then we'll add some exclamation marks
+  if channel == ChatSystemLib.ChatChannel_Yell then
+    strMessage = strMessage.."!!"
+  end
 		
-	-- Check all required Emotes, and fire them before displaying the text bubble
-	if(tMessage.unitSource == GameLib.GetPlayerUnit()) then
+  -- Check all required Emotes, and fire them before displaying the text bubble
+  if(tMessage.unitSource == GameLib.GetPlayerUnit()) then
     self:HelperLaughingEmote(strMessage)
-	end
+  end
 	
-	-- Display the text-bubble using correct formatting.
-	self:DisplayBubble(tMessage.unitSource, strMessage)
+  -- Display the text-bubble using correct formatting.
+  self:DisplayBubble(tMessage.unitSource, strMessage)
 end
 
 -- Checks whether the provided text contains the required keys that would

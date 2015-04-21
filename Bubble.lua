@@ -109,9 +109,10 @@ function Bubble:OnChatMessage(channelCurrent, tMessage)
     strMessage = strMessage ..tSegment.strText
   end
 	
-  -- Check for emotes, we're going to surrounded them by *
+  -- Break out of emotes, to prevent the channel from being spammed.
   if channel == ChatSystemLib.ChatChannel_AnimatedEmote or channel == ChatSystemLib.ChatChannel_Emote then
-    strMessage = "*"..strMessage.."*"
+    --strMessage = "*"..strMessage.."*"
+	return
   end
 	
   -- If we're dealing with a Yell, then we'll add some exclamation marks
@@ -134,15 +135,11 @@ end
 -- We only trigger the emote on the first match
 function Bubble:HelperLaughingEmote(strMessage)
   for i = 1, #karLaughKeyWords do
-    local strPattern = "*"..karLaughKeyWords[i].."*"
+    local strPattern = ".*"..karLaughKeyWords[i]..".*"
     
-    if(strMessage.match(pattern)) then
-		local channel = self:GetChannelByName("Command")
-	  
-		if channel ~= nil then 
-			channel:Send("/laugh") 
-			return
-		end
+    if(strMessage:match(strPattern)) then	  
+		ChatSystemLib.Command("/laugh") 
+		return
     end
   end
 end
@@ -151,11 +148,7 @@ end
 -- /talk command so the character performs the chat emote when saying something.
 function Bubble:HelperSayEmote(channel)
   if channel:GetType() == ChatSystemLib.ChatChannel_Say then
-	local channel = self:GetChannelByName("Command")
-	
-	if channel ~= nil then 
-		channel:Send("/talk") 
-	end
+	ChatSystemLib.Command("/talk")
   end
 end
 

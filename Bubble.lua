@@ -137,8 +137,12 @@ function Bubble:HelperLaughingEmote(strMessage)
     local strPattern = "*"..karLaughKeyWords[i].."*"
     
     if(strMessage.match(pattern)) then
-      ChatSystemLib.Command("/laugh")
-      break
+		local channel = self:GetChannelByName("Command")
+	  
+		if channel ~= nil then 
+			channel:Send("/laugh") 
+			return
+		end
     end
   end
 end
@@ -147,7 +151,11 @@ end
 -- /talk command so the character performs the chat emote when saying something.
 function Bubble:HelperSayEmote(channel)
   if channel:GetType() == ChatSystemLib.ChatChannel_Say then
-    ChatSystemLib.Command("/talk")
+	local channel = self:GetChannelByName("Command")
+	
+	if channel ~= nil then 
+		channel:Send("/talk") 
+	end
   end
 end
 
@@ -157,6 +165,16 @@ end
 --
 function Bubble:DisplayBubble(unitTarget, strMessage)
   unitTarget:AddTextBubble(strMessage)
+end
+
+-- Returns the chatChannel by the given Name.
+-- Returns nil when no match is found.
+function Bubble:GetChannelByName(strName)
+	for i, this_chan in ipairs(ChatSystemLib.GetChannels()) do
+		if this_chan:GetName() == strName then return this_chan end
+	end
+	
+	return nil
 end
 -----------------------------------------------------------------------------------------------
 -- Bubble Instance

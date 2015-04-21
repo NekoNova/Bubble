@@ -122,6 +122,7 @@ function Bubble:OnChatMessage(channelCurrent, tMessage)
   -- Check all required Emotes, and fire them before displaying the text bubble
   if(tMessage.unitSource == GameLib.GetPlayerUnit()) then
     self:HelperLaughingEmote(strMessage)
+    self:HelperSayEmote(channelCurrent)
   end
 	
   -- Display the text-bubble using correct formatting.
@@ -139,6 +140,14 @@ function Bubble:HelperLaughingEmote(strMessage)
       ChatSystemLib.Command("/laugh")
       break
     end
+  end
+end
+
+-- Checks whether the received channel is currently say, and fires the
+-- /talk command so the character performs the chat emote when saying something.
+function Bubble:HelperSayEmote(channel)
+  if channel:GetType() == ChatSystemLib.ChatChannel_Say then
+    ChatSystemLib.Command("/talk")
   end
 end
 

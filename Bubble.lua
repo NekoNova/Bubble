@@ -50,6 +50,7 @@ end
 -----------------------------------------------------------------------------------------------
 -- Bubble OnDocLoaded
 -----------------------------------------------------------------------------------------------
+
 -- Gets called when the XML document finishes loading.
 -- Although we do not have any form to load, we're keeping the code, as we might want
 -- to be able to configure something in the future.
@@ -148,7 +149,6 @@ end
 function Bubble:DisplayBubble(unitTarget, strMessage)
   unitTarget:AddTextBubble(strMessage)
 end
-
 -----------------------------------------------------------------------------------------------
 -- Bubble Instance
 -----------------------------------------------------------------------------------------------

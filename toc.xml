@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Addon Author="Tenpi" APIVersion="10" Name="Bubble" Description="Shows Chat bubbles on NPC&apos;s all over the world" Version="1.3">
+<Addon Author="Tenpi" APIVersion="10" Name="Bubble" Description="Shows Chat bubbles on NPC&apos;s all over the world" Version="1.4">
     <Script Name="Bubble.lua"/>
     <Form Name="Bubble.xml"/>
 </Addon>

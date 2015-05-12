@@ -203,7 +203,7 @@ function Bubble:OnOK( wndHandler, wndControl, eMouseButton )
 	
 	-- Iterate over the string in the keyword box, split it by ,
 	-- and store each keyword string inside the settings array.
-	for(i in string.gmatch(arrKeywords, ",") do
+	for i in string.gmatch(arrKeywords, ",") do
 		table.insert(self.tSettings.arrKeywords, i)
 	end
 	

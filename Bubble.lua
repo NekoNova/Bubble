@@ -214,7 +214,7 @@ function Bubble:OnOK( wndHandler, wndControl, eMouseButton )
 end
 
 function Bubble:OnCancel( wndHandler, wndControl, eMouseButton )
-	self:wndMain:Show(false)
+	self.wndMain:Show(false)
 end
 
 -----------------------------------------------------------------------------------------------

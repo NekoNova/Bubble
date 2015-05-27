@@ -80,6 +80,38 @@ function Bubble:OnDocLoaded()
 end
 
 -----------------------------------------------------------------------------------------------
+-- Bubble Data Storage
+-----------------------------------------------------------------------------------------------
+function Bubble:OnSave(eLevel)
+	if(eLevel ~= GameLib.CodeEnumAddonSaveLevel.Character) then
+		return nil
+	end
+	
+	-- Create a table to store our data.
+	local tSave = {}
+	
+	tSave.nLaughCounter = self.nLaughCounter
+	tSave.nSayCounter = self.nSayCounter
+	tSave.nTimeout = self.nTimeout
+	tSave.arrKeywords = self.arrKeywords
+	tSave.strKeywords = self.wndMain:FindChild("input_s_Keywords"):GetText()
+	
+	-- Simply return the data
+	return tSave
+end
+
+function Bubble:OnRestore(eLevel, tData)
+	if(eLevel ~= GameLib.CodeEnumAddonSaveLevel.Character) then
+		return
+	end
+	
+	self.nLaughCounter = tData.nLaughCounter
+	self.nSayCounter = tData.nSayCounter
+	self.nTimeout = tData.nTimeout
+	self.arrKeywords = tData.arrKeywords
+	self.wndMain:FindChild("input_s_Keywords"):SetText(tData.strKeywords)
+end
+-----------------------------------------------------------------------------------------------
 -- Bubble Functions
 -----------------------------------------------------------------------------------------------
 

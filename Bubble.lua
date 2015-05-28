@@ -94,7 +94,6 @@ function Bubble:OnSave(eLevel)
 	tSave.nSayCounter = self.nSayCounter
 	tSave.nTimeout = self.nTimeout
 	tSave.arrKeywords = self.arrKeywords
-	tSave.strKeywords = self.wndMain:FindChild("input_s_Keywords"):GetText()
 	
 	-- Simply return the data
 	return tSave
@@ -109,7 +108,6 @@ function Bubble:OnRestore(eLevel, tData)
 	self.nSayCounter = tData.nSayCounter
 	self.nTimeout = tData.nTimeout
 	self.arrKeywords = tData.arrKeywords
-	self.wndMain:FindChild("input_s_Keywords"):SetText(tData.strKeywords)
 end
 -----------------------------------------------------------------------------------------------
 -- Bubble Functions

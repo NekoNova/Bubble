@@ -1,0 +1,12 @@
+lightweight tag b6b0c34e6b7fe54e2644d229f170f8977636fbe2 v1.4.4
+Author:	Arne De Herdt <arne.de.herdt@gmail.com>
+Date:	Thu May 28 06:19:34 2015 +0200
+
+commit b6b0c34e6b7fe54e2644d229f170f8977636fbe2
+Author: Arne De Herdt <arne.de.herdt@gmail.com>
+Date:   Thu May 28 06:19:34 2015 +0200
+
+    v1.4.4
+    
+    Fixed Data Load
+

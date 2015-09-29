@@ -18,21 +18,21 @@ local karLaughKeyWords = { "laugh", "laughing", "lol", "heh", "hehe" }
 -- Initialization
 -----------------------------------------------------------------------------------------------
 function Bubble:new(o)
-    o = o or {}
-    setmetatable(o, self)
-    self.__index = self 
+  o = o or {}
+  setmetatable(o, self)
+  self.__index = self 
+  
+  -- initialize variables here
+  self.tSettings = {
+    nTimeout = 5,
+    arrKeywords = { "laugh", "laughing", "lol", "heh", "hehe" },
+    bPartyChat = false,
+    bYellEmote = false,
+  }
+  
+  self.nSayCounter = 0
 
-    -- initialize variables here
-	self.tSettings = {
-		nTimeout = 5,
-		arrKeywords = { "laugh", "laughing", "lol", "heh", "hehe" },
-		bPartyChat = false,
-		bYellEmote = false,
-	}
-	
-	self.nSayCounter = 0
-	
-    return o
+  return o
 end
 
 function Bubble:Init()
@@ -41,7 +41,7 @@ function Bubble:Init()
 	local tDependencies = {
 		-- "UnitOrPackageName",
 	}
-    Apollo.RegisterAddon(self, bHasConfigureFunction, strConfigureButtonText, tDependencies)
+  Apollo.RegisterAddon(self, bHasConfigureFunction, strConfigureButtonText, tDependencies)
 end
  
 
@@ -49,7 +49,7 @@ end
 -- Bubble OnLoad
 -----------------------------------------------------------------------------------------------
 function Bubble:OnLoad()
-    -- load our form file
+  -- load our form file
 	self.xmlDoc = XmlDoc.CreateFromFile("Bubble.xml")
 	self.xmlDoc:RegisterCallback("OnDocLoaded", self)
 end
@@ -62,23 +62,23 @@ end
 -- Although we do not have any form to load, we're keeping the code, as we might want
 -- to be able to configure something in the future.
 function Bubble:OnDocLoaded()
-	if self.xmlDoc ~= nil and self.xmlDoc:IsLoaded() then
-    	self.wndMain = Apollo.LoadForm(self.xmlDoc, "BubbleForm", nil, self)
-	
-		if self.wndMain == nil then
-			Apollo.AddAddonErrorText(self, "Could not load the main window for some reason.")
-			return
-		end
-		
-   		self.wndMain:Show(false, true)
-
-		-- if the xmlDoc is no longer needed, you should set it to nil
-		self.xmlDoc = nil
-		
-		-- Register handlers for events, slash commands and timer, etc.
-		Apollo.RegisterSlashCommand("bubble", "OnBubbleSlashCommand", self)
-		Apollo.RegisterEventHandler("ChatMessage", "OnChatMessage", self)
-	end
+  if self.xmlDoc ~= nil and self.xmlDoc:IsLoaded() then
+    self.wndMain = Apollo.LoadForm(self.xmlDoc, "BubbleForm", nil, self)
+  
+    if self.wndMain == nil then
+  	 Apollo.AddAddonErrorText(self, "Could not load the main window for some reason.")
+  	 return
+   end
+  
+	 self.wndMain:Show(false, true)
+  
+    -- if the xmlDoc is no longer needed, you should set it to nil
+    self.xmlDoc = nil
+    
+    -- Register handlers for events, slash commands and timer, etc.
+    Apollo.RegisterSlashCommand("bubble", "OnBubbleSlashCommand", self)
+    Apollo.RegisterEventHandler("ChatMessage", "OnChatMessage", self)
+  end
 end
 
 -----------------------------------------------------------------------------------------------
